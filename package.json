@@ -8,12 +8,15 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
+    "preview": "bun run build && wrangler dev",
     "astro": "astro",
     "format": "biome format --write .",
-    "format:check": "biome format ."
+    "format:check": "biome format .",
+    "generate-types": "wrangler types",
+    "deploy": "bun run build && wrangler deploy"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^14.1.4",
     "@astrojs/markdown-satteri": "^0.3.2",
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.3",
@@ -28,6 +31,7 @@
     "temml": "^0.13.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.1"
+    "@biomejs/biome": "^2.5.1",
+    "wrangler": "^4.114.0"
   }
 }

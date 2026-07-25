@@ -11,10 +11,13 @@ import { externalLinks } from "./src/lib/external-links"
 import { headingNamespace } from "./src/lib/heading-namespace"
 import { headingAnchors } from "./src/lib/heading-anchors"
 
+import cloudflare from "@astrojs/cloudflare";
+
 export default defineConfig({
   site: "https://astro-erudite.vercel.app",
   compressHTML: true,
   prefetch: { prefetchAll: true },
+
   integrations: [
     sitemap({
       filter: (page) =>
@@ -23,6 +26,7 @@ export default defineConfig({
         !page.includes("/tags/"),
     }),
   ],
+
   markdown: {
     syntaxHighlight: false,
     processor: satteri({
@@ -36,4 +40,6 @@ export default defineConfig({
       ],
     }),
   },
+
+  adapter: cloudflare(),
 })
