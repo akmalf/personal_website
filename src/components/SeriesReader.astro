@@ -72,6 +72,11 @@
     history.replaceState(history.state, "", url + hash)
     if (title) document.title = title
     syncCrumb(article)
+    document.dispatchEvent(
+      new CustomEvent("subpost-change", {
+        detail: { title: article.querySelector("header h1")?.textContent ?? "" },
+      }),
+    )
   }
 
   document.addEventListener("click", (event) => {
