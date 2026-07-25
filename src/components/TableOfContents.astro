@@ -90,13 +90,15 @@ const { title, sections } = Astro.props
 
     &[data-visible] {
       grid-template-rows: 1fr;
-      margin-block-end: var(--space-2xs);
+
+      @media (width >= 64rem) {
+        margin-block-end: var(--space-2xs);
+      }
     }
 
     @media (width < 64rem) {
       display: grid;
       grid-template-rows: 1fr;
-      margin-block-end: var(--space-2xs);
       font-weight: 700;
     }
   }
