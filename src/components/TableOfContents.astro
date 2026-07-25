@@ -14,7 +14,7 @@ const { title, sections } = Astro.props
 ---
 
 <nav aria-label="Table of contents">
-  <toc-title aria-hidden="true"><span>{title}</span></toc-title>
+  <toc-title data-bar aria-hidden="true"><span>{title}</span></toc-title>
   <label data-bar>
     <input type="checkbox" aria-label="Toggle table of contents">
     <svg viewBox="0 0 16 16" aria-hidden="true">
@@ -94,7 +94,10 @@ const { title, sections } = Astro.props
     }
 
     @media (width < 64rem) {
-      display: none;
+      display: grid;
+      grid-template-rows: 1fr;
+      margin-block-end: var(--space-2xs);
+      font-weight: 700;
     }
   }
 
@@ -313,7 +316,10 @@ const { title, sections } = Astro.props
     const heading = document.querySelector("article > header h1")
     if (articles.length === 0 || !list || links.size === 0) return
 
-    const fallback = currentLabel?.textContent ?? ""
+    const fallback =
+      links.values().next().value?.textContent?.trim() ||
+      currentLabel?.textContent ||
+      ""
 
     const groups = [
       ...nav.querySelectorAll<HTMLDetailsElement>("li[data-group] details"),
