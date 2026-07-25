@@ -74,7 +74,9 @@
     syncCrumb(article)
     document.dispatchEvent(
       new CustomEvent("subpost-change", {
-        detail: { title: article.querySelector("header h1")?.textContent ?? "" },
+        detail: {
+          title: article.querySelector("header h1")?.textContent ?? "",
+        },
       }),
     )
   }
