@@ -1,10 +1,15 @@
-<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_741_1317)">
-<path d="M512 366H72V438H512V512H0V292H440V220H0V0H512V74H72V146H512V366Z" fill="#CCCCCC"/>
-</g>
-<defs>
-<clipPath id="clip0_741_1317">
-<rect width="512" height="512" fill="white"/>
-</clipPath>
-</defs>
+<svg viewBox="0 0 2081 2081" xmlns="http://www.w3.org/2000/svg">
+<rect x="2" y="1" width="1039" height="260" fill="#CCCCCC"/>
+<rect x="2" y="521" width="1039" height="260" fill="#CCCCCC"/>
+<rect x="2" y="1041" width="1039" height="260" fill="#CCCCCC"/>
+<rect x="523" y="1561" width="518" height="260" fill="#CCCCCC"/>
+<rect x="1041" y="781" width="1039" height="260" fill="#CCCCCC"/>
+<rect x="1041" y="1301" width="518" height="260" fill="#CCCCCC"/>
+<rect x="1" y="1821" width="260" height="260" fill="#CCCCCC"/>
+<rect x="782" y="521" width="260" height="780" fill="#CCCCCC"/>
+<rect x="782" y="4" width="260" height="780" fill="#CCCCCC"/>
+<rect x="782" y="1301" width="260" height="780" fill="#CCCCCC"/>
+<rect x="1821" y="1821" width="260" height="260" fill="#CCCCCC"/>
+<rect x="1821" y="1" width="260" height="260" fill="#CCCCCC"/>
+<rect x="1" y="782" width="260" height="260" fill="#CCCCCC"/>
 </svg>

@@ -3,7 +3,7 @@ title: "Introducing astro-erudite v2"
 description: "I've rebuilt my blogging template from scratch, and it's better in every way I know how to measure."
 date: 2026-06-06
 authors:
-  - enscribe
+  - akmal
 image: ./assets/banner.png
 tags:
   - v2
@@ -832,6 +832,12 @@ Math syntax (`$...$` and `$$...$$`) is its own Sätteri feature flag, which is w
 
 $$
 1 + \cfrac{e^{-2\pi}}{1 + \cfrac{e^{-4\pi}}{1 + \cfrac{e^{-6\pi}}{1 + \cfrac{e^{-8\pi}}{1 + \cdots}}}} = \left( \sqrt{\frac{5 + \sqrt{5}}{2}} - \frac{1 + \sqrt{5}}{2} \right) e^{2\pi/5}
+$$
+
+and 
+
+$$
+\oint_C \vec{B}\circ d\vec{l} = \mu_0 \left( I_{\text{enc}} + \varepsilon_0 \frac{d}{d t} \int_S {\vec{E} \circ \hat{n}}\; d a \right)
 $$
 
 #### Rendering callouts

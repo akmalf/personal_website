@@ -59,12 +59,15 @@ prose-content {
       padding-block: 0.35ex;
     }
 
-    .mathscr {
-      font-feature-settings: "ss01";
+    mo.tml-prime {
+      font-feature-settings: "ssty";
     }
 
-    mo.tml-prime {
-      font-feature-settings: "ss04";
+    &.mathcal,
+    .mathcal,
+    &.mathscr,
+    .mathscr {
+      font-family: "Cambria Math", "STIXTwoMath-Regular", "Times New Roman", math;
     }
 
     mfrac > :nth-child(2),
@@ -150,6 +153,10 @@ prose-content {
     }
 
     @supports (not (-moz-appearance: none)) {
+      mo.tml-prime {
+        font-family: "Temml";
+      }
+
       .tml-sml-pad {
         padding-left: 0.05em;
       }

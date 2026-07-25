@@ -5,7 +5,7 @@ import RSS from "@/assets/icons/rss.svg"
 import Twitter from "@/assets/icons/twitter.svg"
 
 export const SITE = {
-  title: "astro-erudite",
+  title: "akml.dev",
   description: "An opinionated, unstyled blogging template built with Astro.",
   locale: "en-US",
   dir: "ltr",
