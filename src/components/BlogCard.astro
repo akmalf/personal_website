@@ -10,11 +10,13 @@ const authors = await getEntries(post.data.authors)
 ---
 
 <li>
-  {post.data.image && (
-      <a href={`/blog/${post.id}`} tabindex="-1" aria-hidden="true">
-        <Image src={post.data.image} alt="" width={640} height={336} />
-      </a>
+  <a href={`/blog/${post.id}`} tabindex="-1" aria-hidden="true">
+    {post.data.image ? (
+      <Image src={post.data.image} alt="" width={640} height={336} />
+    ) : (
+      <img src={`/og/${post.id}.png`} alt="" width="640" height="336" loading="lazy" />
     )}
+  </a>
   <entry-info>
     <a href={`/blog/${post.id}`}>{post.data.title}</a>
     <entry-meta>
@@ -57,6 +59,11 @@ const authors = await getEntries(post.data.authors)
     display: flex;
     align-items: flex-start;
     gap: var(--space-s);
+
+    &:not(:first-child) {
+      padding-block-start: var(--space-m);
+      border-block-start: 2px solid var(--border);
+    }
 
     > a {
       flex-shrink: 0;
