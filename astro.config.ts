@@ -14,7 +14,7 @@ import { headingAnchors } from "./src/lib/heading-anchors"
 import cloudflare from "@astrojs/cloudflare"
 
 export default defineConfig({
-  site: "https://astro-erudite.vercel.app",
+  site: "https://akml.dev",
   compressHTML: true,
   prefetch: { prefetchAll: true },
 
