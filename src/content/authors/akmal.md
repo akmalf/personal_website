@@ -6,5 +6,5 @@ bio: "Data scientist"
 mail: "akmal.fadhlurrahman@gmail.com"
 socials:
   website: "https://akml.dev"
-  github: "https://github.com/akml"
+  github: "https://github.com/akmalf"
 ---
