@@ -14,7 +14,25 @@ import VisaLogo from "@/assets/logos/visa.svg"
 
 const recentPosts = (await getPosts()).slice(0, 3)
 const atMaybank = Date.now() >= Date.parse("2026-09-07")
+
 ---
+
+<style>
+  dim-span {
+    opacity: 0.6;
+  }
+
+  delta-down {
+    color: light-dark(oklch(48% 0.12 150), oklch(83% 0.1 150));
+  }
+
+  click-counter button {
+    padding: var(--space-3xs) var(--space-2xs);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+  }
+</style>
 
 <Layout>
   <MetaPage slot="head" />
@@ -22,11 +40,13 @@ const atMaybank = Date.now() >= Date.parse("2026-09-07")
     <h1>Hi, I'm Akmal.</h1>
     <prose-content>
       <p>
-        I'm a data scientist based in Jakarta, with over eight years of
-        experience building analytics and machine learning solutions for retail
-        banking. I've worked across major institutions including
-        <inst-logo><CitiLogo /></inst-logo>Citi and
-        <inst-logo><UOBLogo /></inst-logo>UOB{atMaybank ? (
+        I'm a data scientist based in <a
+          href="https://www.google.com/maps/place/Jakarta,+Indonesia/"
+          target="_blank"
+          rel="noopener noreferrer">Jakarta, Indonesia</a> with over eight years of
+        experience building analytics and machine learning solutions for financial institutions <dim-span>(especially retail banking)</dim-span>. I've worked across major institutions including
+        <inst-logo class="nudge-up"><CitiLogo /></inst-logo> and
+        <inst-logo><UOBLogo /></inst-logo>{atMaybank ? (
             <>, and <inst-logo><VisaLogo /></inst-logo>Visa Indonesia, and currently
         work at <inst-logo class="badge"><MaybankLogo /></inst-logo>Maybank</>
           ) : (
@@ -39,18 +59,20 @@ const atMaybank = Date.now() >= Date.parse("2026-09-07")
         helping others build the same skills I rely on every day.
       </p>
       <p>
-        My academic background spans mathematics and economics — a B.Sc. in
+        My academic background spans mathematics and economics. I have a B.Sc. in
         Mathematics from <inst-logo><ITBLogo /></inst-logo>Institut Teknologi
         Bandung, and a Master's in Economics and Finance from the
-        <inst-logo><BSELogo /></inst-logo>Barcelona Graduate School of Economics
-        — rounded out more recently with a Master's in Artificial Intelligence
-        from <inst-logo><UdacityLogo /></inst-logo>Udacity.
+        <inst-logo><BSELogo /></inst-logo>Barcelona Graduate School of Economics. 
+        I am currently pursuing a Master's degree in Artificial Intelligence
+        at <inst-logo><UdacityLogo /></inst-logo>Udacity.
       </p>
       <p>
         Feel free to reach out at
         <a href="mailto:akmal.fadhlurrahman@gmail.com"
           >akmal.fadhlurrahman@gmail.com</a
-        >, or find me through the links below.
+        >, or find me through the links below. I also occasionally write about 
+        data science, economics, and everything else on this blog; check out 
+        my recent posts below.
       </p>
     </prose-content>
     <hr>
@@ -112,6 +134,10 @@ const atMaybank = Date.now() >= Date.parse("2026-09-07")
         &.badge {
           border-radius: 0.2em;
           overflow: hidden;
+        }
+
+        &.nudge-up {
+          vertical-align: 0;
         }
       }
     }
