@@ -1,5 +1,6 @@
 ---
 import asciiArt from "@/assets/ascii-art.txt?raw"
+import ArrowRight from "@/assets/icons/arrow-right.svg"
 import MetaPage from "@/components/MetaPage.astro"
 import Layout from "@/layouts/Layout.astro"
 import { getPosts } from "@/lib/content"
@@ -14,7 +15,6 @@ import VisaLogo from "@/assets/logos/visa.svg"
 
 const recentPosts = (await getPosts()).slice(0, 3)
 const atMaybank = Date.now() >= Date.parse("2026-09-07")
-
 ---
 
 <style>
@@ -40,13 +40,21 @@ const atMaybank = Date.now() >= Date.parse("2026-09-07")
     <h1>Hi, I'm Akmal.</h1>
     <prose-content>
       <p>
-        I'm a data scientist based in <a
+        I'm a data scientist based in
+        <a
           href="https://www.google.com/maps/place/Jakarta,+Indonesia/"
           target="_blank"
-          rel="noopener noreferrer">Jakarta, Indonesia</a> with over eight years of
-        experience building analytics and machine learning solutions for financial institutions <dim-span>(especially retail banking)</dim-span>. I've worked across major institutions including
-        <inst-logo class="nudge-up"><CitiLogo /></inst-logo> and
-        <inst-logo><UOBLogo /></inst-logo>{atMaybank ? (
+          rel="noopener noreferrer"
+          >Jakarta, Indonesia</a
+        >
+        with over eight years of experience building analytics and machine
+        learning solutions for financial institutions
+        <dim-span>(especially retail banking)</dim-span>. I've worked across
+        major institutions including
+        <inst-logo class="nudge-up"><CitiLogo /></inst-logo>
+        and
+        <inst-logo><UOBLogo /></inst-logo>
+        {atMaybank ? (
             <>, and <inst-logo><VisaLogo /></inst-logo>Visa Indonesia, and currently
         work at <inst-logo class="badge"><MaybankLogo /></inst-logo>Maybank</>
           ) : (
@@ -59,20 +67,20 @@ const atMaybank = Date.now() >= Date.parse("2026-09-07")
         helping others build the same skills I rely on every day.
       </p>
       <p>
-        My academic background spans mathematics and economics. I have a B.Sc. in
-        Mathematics from <inst-logo><ITBLogo /></inst-logo>Institut Teknologi
+        My academic background spans mathematics and economics. I have a B.Sc.
+        in Mathematics from <inst-logo><ITBLogo /></inst-logo>Institut Teknologi
         Bandung, and a Master's in Economics and Finance from the
-        <inst-logo><BSELogo /></inst-logo>Barcelona Graduate School of Economics. 
-        I am currently pursuing a Master's degree in Artificial Intelligence
-        at <inst-logo><UdacityLogo /></inst-logo>Udacity.
+        <inst-logo><BSELogo /></inst-logo>Barcelona Graduate School of
+        Economics. I am currently pursuing a Master's degree in Artificial
+        Intelligence at <inst-logo><UdacityLogo /></inst-logo>Udacity.
       </p>
       <p>
         Feel free to reach out at
         <a href="mailto:akmal.fadhlurrahman@gmail.com"
           >akmal.fadhlurrahman@gmail.com</a
-        >, or find me through the links below. I also occasionally write about 
-        data science, economics, and everything else on this blog; check out 
-        my recent posts below.
+        >, or find me through the links below. I also occasionally write about
+        data science, economics, and everything else on this blog; check out my
+        recent posts below.
       </p>
     </prose-content>
     <hr>
@@ -88,6 +96,7 @@ const atMaybank = Date.now() >= Date.parse("2026-09-07")
           </li>
         ))}
       </ul>
+      <a class="all-posts" href="/blog">All posts <ArrowRight /></a>
     </section>
     <ascii-art aria-hidden="true"><pre>{asciiArt}</pre></ascii-art>
   </home-intro>
@@ -178,6 +187,24 @@ const atMaybank = Date.now() >= Date.parse("2026-09-07")
           flex-shrink: 0;
           font-size: var(--step--1);
           color: var(--muted-foreground);
+        }
+      }
+
+      .all-posts {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-3xs);
+        margin-block-start: var(--space-s);
+        font-size: var(--step--1);
+        color: var(--muted-foreground);
+
+        &:hover {
+          color: var(--foreground);
+        }
+
+        svg {
+          inline-size: 1em;
+          block-size: 1em;
         }
       }
     }
