@@ -6,6 +6,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Akmal Fadhlurrahman's personal site (akml.dev), built on the **astro-erudite** template (Astro 7, no UI/CSS framework, native CSS only). Static output, deployed to Cloudflare as a Worker.
 
+## When to update this file
+
+Not after every commit — most changes here are small content/styling tweaks that don't warrant it. Update `CLAUDE.md` (and the `run` skill, where relevant) when a change involved real debugging to figure out, introduced a new pattern future work will need to follow, or uncovered a gotcha that would otherwise get rediscovered the hard way — e.g. the Cloudflare adapter config, the OG-image pipeline, the logo-sourcing quirks below. A one-line CSS fix doesn't need an entry; a "this took an hour to figure out why it was broken" does.
+
 ## Commands
 
 ```bash
