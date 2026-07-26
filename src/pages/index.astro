@@ -4,8 +4,16 @@ import MetaPage from "@/components/MetaPage.astro"
 import Layout from "@/layouts/Layout.astro"
 import { getPosts } from "@/lib/content"
 import { formatDate } from "@/lib/utils"
+import BSELogo from "@/assets/logos/bse.svg"
+import CitiLogo from "@/assets/logos/citi.svg"
+import ITBLogo from "@/assets/logos/itb.svg"
+import MaybankLogo from "@/assets/logos/maybank.svg"
+import UdacityLogo from "@/assets/logos/udacity.svg"
+import UOBLogo from "@/assets/logos/uob.svg"
+import VisaLogo from "@/assets/logos/visa.svg"
 
 const recentPosts = (await getPosts()).slice(0, 3)
+const atMaybank = Date.now() >= Date.parse("2026-09-07")
 ---
 
 <Layout>
@@ -16,9 +24,15 @@ const recentPosts = (await getPosts()).slice(0, 3)
       <p>
         I'm a data scientist based in Jakarta, with over eight years of
         experience building analytics and machine learning solutions for retail
-        banking. I've worked across major institutions including Citi and UOB,
-        and currently consult for Visa Indonesia, focusing on turning complex
-        data into practical, business-moving decisions.
+        banking. I've worked across major institutions including
+        <inst-logo><CitiLogo /></inst-logo>Citi and
+        <inst-logo><UOBLogo /></inst-logo>UOB{atMaybank ? (
+            <>, and <inst-logo><VisaLogo /></inst-logo>Visa Indonesia, and currently
+        work at <inst-logo class="badge"><MaybankLogo /></inst-logo>Maybank</>
+          ) : (
+            <>, and currently consult for <inst-logo><VisaLogo /></inst-logo>Visa Indonesia</>
+          )}, focusing on turning complex data into practical, business-moving
+        decisions.
       </p>
       <p>
         Alongside my day job, I teach Python for data analytics at RevoU,
@@ -26,9 +40,11 @@ const recentPosts = (await getPosts()).slice(0, 3)
       </p>
       <p>
         My academic background spans mathematics and economics — a B.Sc. in
-        Mathematics from Institut Teknologi Bandung, and a Master's in Economics
-        and Finance from the Barcelona Graduate School of Economics — rounded
-        out more recently with a Master's in Artificial Intelligence.
+        Mathematics from <inst-logo><ITBLogo /></inst-logo>Institut Teknologi
+        Bandung, and a Master's in Economics and Finance from the
+        <inst-logo><BSELogo /></inst-logo>Barcelona Graduate School of Economics
+        — rounded out more recently with a Master's in Artificial Intelligence
+        from <inst-logo><UdacityLogo /></inst-logo>Udacity.
       </p>
       <p>
         Feel free to reach out at
@@ -78,6 +94,25 @@ const recentPosts = (await getPosts()).slice(0, 3)
 
       p + p {
         margin-block-start: var(--space-xs);
+      }
+
+      inst-logo {
+        display: inline-flex;
+        align-items: center;
+        vertical-align: -0.15em;
+        block-size: 1em;
+        margin-inline-end: 0.3em;
+
+        :global(svg) {
+          block-size: 100%;
+          inline-size: auto;
+          max-inline-size: 3em;
+        }
+
+        &.badge {
+          border-radius: 0.2em;
+          overflow: hidden;
+        }
       }
     }
 
