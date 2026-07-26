@@ -55,6 +55,15 @@ await browser.close()
 
 The breakpoint for mobile-vs-desktop layout throughout this codebase is `64rem` (1024px) — anything narrower than that in the viewport triggers the mobile CSS paths.
 
+## Diagnosing pixel-level alignment issues
+
+Don't guess offsets from a full-page screenshot — measure. Two techniques, both via `page.evaluate()` in a throwaway script (same scratchpad setup as above):
+
+- **Comparing rendered position of two elements** (e.g. "is this icon sitting lower than that one"): `element.getBoundingClientRect()` on both and diff the numbers. If two elements report identical `top`/`bottom`/`height`, the problem isn't a CSS box/positioning bug — it's something about the visible content within an identical box (e.g. an SVG's internal ink not filling its own viewBox evenly), which no amount of margin/padding tweaking on the wrapper will fix.
+- **Checking whether an SVG's declared viewBox matches its actual content**: load the raw SVG in a blank page (`page.setContent`) and call `svgElement.getBBox()`, then compare against the `viewBox` attribute. A mismatch (bbox much smaller than viewBox, or off-center within it) means the source file has baked-in padding — see the CLAUDE.md note on third-party logo SVGs for a live example (Visa's Simple Icons export was only 32% ink within its declared square).
+
+For fine alignment work specifically, a tight `clip` screenshot at `deviceScaleFactor: 3` around just the element in question (using its `boundingBox()` as the clip origin) shows sub-pixel issues that a normal full-viewport screenshot won't.
+
 ## What to check on a TOC/mobile-header change specifically
 
 This area has a recurring failure mode: an element in the sticky mobile header rendering without the `[data-bar]` attribute (see `src/styles/bar.css`), which makes it fully transparent so page content bleeds through behind it as you scroll. After any change here, screenshot at least two scroll positions — top of page, and scrolled a few hundred px into body content — and check for text/images showing through the header bar that shouldn't be there.

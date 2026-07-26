@@ -52,6 +52,19 @@ No CSS framework. `src/styles/` is a set of hand-written token/utility files loa
 
 Layout is `page-grid` / `page-header` / `page-nav` / `page-toc` / `page-content`, defined in `src/layouts/Layout.astro`, using autonomous custom elements as CSS hooks rather than classes.
 
+## Homepage (`src/pages/index.astro`)
+
+Not a generic template page — it's Akmal's bio, and has accumulated a few patterns worth knowing before touching it:
+
+- **Inline institution logos.** Real brand SVGs (Citi, UOB, Visa, ITB, Barcelona School of Economics, Udacity, Maybank) live in `src/assets/logos/`, sourced from Wikimedia Commons / Simple Icons, and render inline mid-sentence via a shared `<inst-logo>` wrapper (`block-size: 1em`, scaled to fit). Two recurring problems with third-party logo SVGs, both already hit here:
+  - **Missing `viewBox`.** Some Commons exports only have `width`/`height`, no `viewBox`. Without it, CSS-driven rescaling (`block-size: 1em; inline-size: auto`) can collapse the element to zero width, since the browser has no intrinsic aspect ratio to size `auto` against. Fix: add `viewBox="0 0 <width> <height>"` matching the declared dimensions.
+  - **Padded viewBox that doesn't match the ink.** Simple Icons normalizes every logo into a 24x24 square regardless of its natural proportions — a wide wordmark like Visa's true ink might only occupy ~30% of that square's height, so scaling to a fixed line-height renders it almost invisible. Diagnose by loading the SVG in a headless browser and calling `element.getBBox()` to get the real content bounds, then tighten the `viewBox` to match (with a little padding).
+  - Logos with no transparent version available (Maybank's official SVG/PNG both bake in its yellow background) get a `.badge` modifier class (rounded corners, `overflow: hidden`) instead of trying to render bare.
+  - Inline-flex icons (`display: inline-flex; align-items: center`) have no baseline-aligned child, so their reported baseline defaults to the box's bottom edge — a shared `vertical-align` tuned to look right for most logos can still read as "sitting low" for one with bottom-heavy visual weight (this happened with Citi). Per-instance override (a `.nudge-up` modifier resetting `vertical-align: 0`) beats trying to find one offset that works for every logo.
+- **Date-conditional bio text.** Akmal moves from consulting for Visa to a permanent role at Maybank on 2026-09-07; rather than a manual edit, `atMaybank = Date.now() >= Date.parse("2026-09-07")` picks which clause renders, at build time. This is the established pattern for any future "this changes on date X" content — but remember the site is static, so the switch only takes effect on the next deploy *after* that date, not automatically at midnight.
+- **Astro template whitespace**: inside `<>...</>` fragments or between adjacent inline elements, a newline immediately before/after punctuation (e.g. a leading `, ` on its own line) gets preserved as a literal space rather than trimmed, producing stray spaces like `"UOB , and"`. Keep fragment boundaries tight against adjacent punctuation instead of wrapping them onto their own line.
+- The auto-generated OG image (see above) also serves as the fallback thumbnail on `/blog`, `/tags/[id]`, and `/authors/[id]` listings when a post has no custom `image` — `BlogCard.astro` renders `/og/${post.id}.png` directly via `<img>` instead of `astro:assets`' `<Image>`, since it's a plain build-time static file, not a local content-collection asset.
+
 ## Testing UI changes locally
 
 `astro dev` can be unreliable in this environment (see the workerd/`nodejs_compat` note above — if it ever regresses, check that flag first). When it's not viable, `bun run build` + serving `dist/client` with any static file server is a faithful substitute for anything that doesn't need live reload, since the site has no server-rendered routes.
