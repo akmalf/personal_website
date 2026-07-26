@@ -1,59 +1,62 @@
 ---
+import asciiArt from "@/assets/ascii-art.txt?raw"
 import MetaPage from "@/components/MetaPage.astro"
 import Layout from "@/layouts/Layout.astro"
+import { getPosts } from "@/lib/content"
+import { formatDate } from "@/lib/utils"
+
+const recentPosts = (await getPosts()).slice(0, 3)
 ---
 
 <Layout>
   <MetaPage slot="head" />
-  <dictionary-entry>
-    <h1>er·u·dite</h1>
-    <etymology-span>
-      <ipa-span>/ˈer(y)əˌdīt/</ipa-span>
-      adj. [L. <i>ēruditus</i>, instructed, pp. of <i>ērudīre</i> to instruct,
-      polish, lit. to free from roughness, f. ē- out + <i>rudis</i> rough,
-      untrained]
-    </etymology-span>
-    <ol>
-      <li>
-        having or showing deep, wide-ranging knowledge acquired through study;
-        learned (<i>an erudite scholar</i>).
-      </li>
-      <li>
-        (of writing, speech, or argument) reflecting such knowledge; scholarly (<i
-          >an erudite footnote</i
-        >).
-      </li>
-    </ol>
-    <hr>
+  <home-intro>
+    <h1>Hi, I'm Akmal.</h1>
     <prose-content>
       <p>
-        astro-erudite is
-        <a href="https://enscribe.dev" target="_blank" rel="noopener noreferrer"
-          >enscribe</a
-        >'s opinionated, unstyled static blogging template built with
-        <a href="https://astro.build" target="_blank" rel="noopener noreferrer"
-          >Astro</a
-        >
-        and native CSS. astro-erudite uses no UI or CSS framework and contains
-        minimal dependencies.
+        I'm a data scientist based in Jakarta, with over eight years of
+        experience building analytics and machine learning solutions for retail
+        banking. I've worked across major institutions including Citi and UOB,
+        and currently consult for Visa Indonesia, focusing on turning complex
+        data into practical, business-moving decisions.
       </p>
       <p>
-        To use this template, check out the
-        <a
-          href="https://github.com/jktrn/astro-erudite"
-          target="_blank"
-          rel="noopener noreferrer"
-          >GitHub</a
-        >
-        repository. To learn more about why this template exists, read this blog
-        post: <a href="/blog/introducing-v2">Introducing astro-erudite v2</a>.
+        Alongside my day job, I teach Python for data analytics at RevoU,
+        helping others build the same skills I rely on every day.
+      </p>
+      <p>
+        My academic background spans mathematics and economics — a B.Sc. in
+        Mathematics from Institut Teknologi Bandung, and a Master's in Economics
+        and Finance from the Barcelona Graduate School of Economics — rounded
+        out more recently with a Master's in Artificial Intelligence.
+      </p>
+      <p>
+        Feel free to reach out at
+        <a href="mailto:akmal.fadhlurrahman@gmail.com"
+          >akmal.fadhlurrahman@gmail.com</a
+        >, or find me through the links below.
       </p>
     </prose-content>
-  </dictionary-entry>
+    <hr>
+    <section>
+      <h2>Recent posts</h2>
+      <ul>
+        {recentPosts.map((post) => (
+          <li>
+            <a href={`/blog/${post.id}`}>{post.data.title}</a>
+            <time datetime={post.data.date.toISOString()}
+              >{formatDate(post.data.date)}</time
+            >
+          </li>
+        ))}
+      </ul>
+    </section>
+    <ascii-art aria-hidden="true"><pre>{asciiArt}</pre></ascii-art>
+  </home-intro>
 </Layout>
 
 <style>
-  dictionary-entry {
+  home-intro {
     display: block;
     font-size: var(--step-0);
     color: var(--muted-foreground);
@@ -62,47 +65,89 @@ import Layout from "@/layouts/Layout.astro"
       margin-block-start: -0.2em;
     }
 
-    ipa-span {
-      opacity: 0.6;
-    }
-
     h1 {
       font-size: var(--step-2);
       line-height: calc(var(--leading-offset) + 1em);
       font-weight: var(--font-weight-medium);
       color: var(--foreground);
-      margin-block-end: var(--space-2xs);
+      margin-block-end: var(--space-xs);
     }
 
-    ol {
-      margin-block-start: var(--space-xs);
-      list-style: none;
+    prose-content {
+      display: block;
 
-      li {
-        padding-inline-start: 1em;
-        text-indent: -1em;
-
-        &::before {
-          content: counter(list-item);
-          display: inline-block;
-          inline-size: 1em;
-          text-indent: 0;
-          font-weight: var(--font-weight-medium);
-        }
-
-        + li {
-          margin-block-start: var(--space-3xs);
-        }
+      p + p {
+        margin-block-start: var(--space-xs);
       }
     }
 
     hr {
-      margin-block: var(--space-m);
+      margin-block: var(--space-l);
+      border: none;
       border-block-start: 2px solid var(--border);
     }
 
-    prose-content {
-      margin-block-start: var(--space-xs);
+    section {
+      h2 {
+        font-size: var(--step-1);
+        line-height: calc(var(--leading-offset) + 1em);
+        font-weight: var(--font-weight-medium);
+        color: var(--foreground);
+        margin-block-end: var(--space-s);
+      }
+
+      ul {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2xs);
+      }
+
+      li {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: var(--space-s);
+
+        a {
+          color: var(--foreground);
+        }
+
+        time {
+          flex-shrink: 0;
+          font-size: var(--step--1);
+          color: var(--muted-foreground);
+        }
+      }
+    }
+
+    ascii-art {
+      display: block;
+      container-type: inline-size;
+      margin-block-start: var(--space-l);
+
+      pre {
+        font-family: var(--font-mono);
+        font-size: 2.1cqw;
+        line-height: 1.15;
+        white-space: pre;
+        overflow: hidden;
+      }
+
+      @media (width >= 64rem) {
+        position: fixed;
+        inset-block: var(--page-offset-top) var(--page-offset-bottom);
+        inset-inline-end: var(--grid-edge);
+        inline-size: calc(
+          3 *
+          var(--grid-column-width) +
+          2 *
+          var(--grid-gutter)
+        );
+        margin-block-start: 0;
+        display: flex;
+        align-items: center;
+      }
     }
   }
 </style>
