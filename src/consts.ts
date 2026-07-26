@@ -1,12 +1,14 @@
 import type { SvgComponent } from "astro/types"
 import Email from "@/assets/icons/email.svg"
 import GitHub from "@/assets/icons/github.svg"
+import LinkedIn from "@/assets/icons/linkedin.svg"
 import RSS from "@/assets/icons/rss.svg"
 import YouTube from "@/assets/icons/youtube.svg"
 
 export const SITE = {
   title: "akml.dev",
-  description: "An opinionated, unstyled blogging template built with Astro.",
+  description:
+    "Data scientist in retail banking, writing about data, machine learning, economics, and whatever else comes up.",
   locale: "en-US",
   dir: "ltr",
   defaultPageImage: "/static/opengraph-image.png",
@@ -20,6 +22,11 @@ export const NAVIGATION = [
 
 export const SOCIALS: { href: string; label: string; icon: SvgComponent }[] = [
   { href: "https://github.com/akmalf", label: "GitHub", icon: GitHub },
+  {
+    href: "https://www.linkedin.com/in/akmalf",
+    label: "LinkedIn",
+    icon: LinkedIn,
+  },
   {
     href: "mailto:akmal.fadhlurrahman@gmail.com",
     label: "Email",
